@@ -1,7 +1,3 @@
-Here's the updated README for your Movie Recommendation System with the additional information about the machine learning algorithms used in your project:
-
----
-
 # Movie Recommendation System
 
 This is a **Movie Recommendation System** built with **React** for the frontend and **Python** for the backend. It provides movie recommendations based on a custom-built machine learning algorithm that utilizes data science concepts. The movie data and recommendations are fetched dynamically from the backend.
