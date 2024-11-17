@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Movie Recommendation System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a **Movie Recommendation System** built with **React** for the frontend and **Python** for the backend. It provides movie recommendations based on a custom-built machine learning algorithm that utilizes data science concepts. The movie data and recommendations are fetched dynamically from the backend.
+Deployed link : [https://movie-recommender-9f504.web.app/](https://movie-recommender-9f504.web.app/)
+## Features
 
-## Available Scripts
+- **Movie Exploration**: View a list of movies with their title and a brief overview.
+- **Movie Recommendations**: Enter a movie title to get recommendations based on the movie's genre, keywords, cast, and crew.
+- **Movie Info Dialog**: Click on a movie to open a dialog with more details (coming soon feature).
+- **Dark Mode UI**: The app is designed with a dark theme for enhanced user experience.
 
-In the project directory, you can run:
+## Technologies Used
 
-### `npm start`
+- **Frontend**: React, Material UI, Axios (for fetching data)
+- **Backend**: Python (via PythonAnywhere), RESTful API
+- **Machine Learning**: 
+    - **Cosine Similarity** for finding similar movies based on text data (tags, genres, keywords, cast, and crew).
+    - **CountVectorizer** from scikit-learn for text vectorization, converting movie attributes like genres, keywords, and cast into numeric data that can be compared for similarity.
+  
+## Backend Logic (Machine Learning)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The recommendation system uses a **content-based filtering approach** where movie attributes (such as genres, keywords, cast, crew, and overview) are combined into a "tags" column. These tags are processed and compared using the following steps:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Data Merging and Preprocessing**: 
+   - The movie data (`tmdb_5000_movies.csv`) is merged with movie credits (`tmdb_5000_credits.csv`) using the movie title.
+   - The columns related to genres, keywords, cast, and crew are cleaned and processed to convert strings into lists using Python's `ast.literal_eval` function.
+   - Link for Datasets : https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata
+     
+2. **Text Vectorization**:
+   - The **CountVectorizer** from scikit-learn is used to convert text data (tags) into numeric vectors.
+   - A total of 5,000 features are extracted from the tags, which consist of genres, keywords, cast, crew, and overview.
 
-### `npm test`
+3. **Cosine Similarity**:
+   - The **Cosine Similarity** algorithm is used to compare the vectorized movie tags and calculate the similarity between movies.
+   - This similarity is then used to recommend movies that are most similar to the one entered by the user.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. **Recommendation Function**:
+   - The system uses an index lookup to find the movie that matches the user's input and then calculates the most similar movies.
+   - The top 5 recommendations are returned based on their similarity score.
 
-### `npm run build`
+Example:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For the movie *Avatar*, the system recommends:
+- *Titan A.E.*
+- *Small Soldiers*
+- *Ender's Game*
+- *Aliens vs Predator: Requiem*
+- *Independence Day*
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. The backend should be hosted separately (e.g., using PythonAnywhere). Ensure your backend is running to fetch movie data and recommendations.
 
-### `npm run eject`
+## How to Use
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Movies Tab**: Browse through the list of movies. Click on a movie to view more details.
+2. **Recommender Tab**: Enter the name of any movie in the search bar to get a list of recommended movies based on that title.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Screenshots
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![image](https://github.com/user-attachments/assets/b3e1aa77-c58a-40af-a01b-7894aaf48f7c)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![image](https://github.com/user-attachments/assets/3649a20b-85cc-4e56-9a02-8f752d23ad9f)
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Feel free to fork the repository and submit issues or pull requests. Contributions are always welcome!
 
-### Code Splitting
+1. Fork this repository.
+2. Create a new branch for your changes.
+3. Make your changes and commit them.
+4. Push to your fork and submit a pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
 
-### Analyzing the Bundle Size
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Acknowledgements
 
-### Making a Progressive Web App
+- [Material UI](https://mui.com/) for the UI components.
+- [React](https://reactjs.org/) for the frontend framework.
+- [PythonAnywhere](https://www.pythonanywhere.com/) for hosting the backend API.
+- **scikit-learn** for the machine learning algorithms: **CountVectorizer** and **Cosine Similarity**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+### Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- The recommendation system is based on the **content-based filtering** approach, which uses movie attributes such as genres, keywords, cast, and crew to make recommendations.
+- This app requires a backend that serves the data and handles the recommendation logic. The backend API is implemented using Python and can be hosted on platforms like PythonAnywhere.
+- You can extend the backend by adding more movie attributes or improving the recommendation algorithm, such as implementing collaborative filtering.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
