@@ -1,7 +1,7 @@
 # Movie Recommendation System
 
 This is a **Movie Recommendation System** built with **React** for the frontend and **Python** for the backend. It provides movie recommendations based on a custom-built machine learning algorithm that utilizes data science concepts. The movie data and recommendations are fetched dynamically from the backend.
-
+Deployed link : [https://movie-recommender-9f504.web.app/](https://movie-recommender-9f504.web.app/)
 ## Features
 
 - **Movie Exploration**: View a list of movies with their title and a brief overview.
